@@ -1,6 +1,7 @@
-//Require mysql and inquirer 
+//Require mysql and inquirer and cli-table2
 var mysql = require('mysql');
 var inquirer= require('inquirer');
+var table = require("cli-table2");
 
 // Connectingt to the bamazon_db
 var connection = mysql.createConnection({
@@ -12,7 +13,7 @@ var connection = mysql.createConnection({
 
     //passowrd
     password: "Keiffer_11",
-    database: "bamazon"
+    database: "bstamazon_db"
 });
 
 connection.connect(function(err){
@@ -22,17 +23,17 @@ connection.connect(function(err){
 
 //Show the table with products for consumer to view
 function showProducts(answer) {
-    var query = "SELECT item_id,product_name,price,stock_quantity FROM products";
+    var query = "SELECT product_name,price,stock_quantity FROM products";
     connection.query(query,  function(err, res) {
       var theDisplayTable = new Table({
-        head: ['Item ID', 'Product Name', 'Price', 'Quantity'],
+        head: ['Product Name', 'Price', 'Quantity'],
 
           colWidths: [10, 30, 10, 14]
         });
 
         for (var i = 0; i < res.length; i++) {
            theDisplayTable.push(
-            [res[i].item_id, res[i].product_name, res[i].price, res[i].stock_quantity]
+            [res[i].product_name, res[i].price, res[i].stock_quantity]
             );
          }
             console.log(theDisplayTable.toString());
@@ -57,7 +58,7 @@ function pickProduct(answer) {
       }
 
       ]).then(function(answer) {
-          connection.query("SELECT item_id,product_name,price,stock_quantity FROM products WHERE ?",
+          connection.query("SELECT product_name,price,stock_quantity FROM products WHERE ?",
             {item_id: answer.item},  function(err, res) {
 
               //console.log("count " + answer.count);
