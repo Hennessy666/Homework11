@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var inquirer = require('inquirer');
 var Table = require("cli-table2");
 
-// Connectingt to the bamazon_db
+// Connectingt to the bstamazon_db
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -58,10 +58,11 @@ var shopping = function () {
     }).then(function (answer1) {
         //query for customers who selection
         var selection = answer1.productToBuy;
-        connection.query("SELECT * FROM products WHERE id=?", selection, function (err, res) {
+        connection.query("SELECT * FROM products WHERE item_id=?", selection, function (err, res) {
             if (err) throw err;
             if (res.length === 0) {
-                console.log("That product doesn't exist! Please enter a product ID from above");
+                console.log("That product doesn't exist! Please enter a product ID from above"
+                );
 
                 shopping();
             } else {
@@ -69,7 +70,8 @@ var shopping = function () {
                     name: "quantity",
                     type: "input",
                     message: "How many items would you like to buy?"
-                }.then(function (answer2) {
+                      })
+                      .then(function (answer2) {
                     var quantity = answer2.quantity;
                     if (quantity > res[0].stock_quantity) {
                         console.log("Our Apologies we only have" + res[0].stock_quantity + "items of it left"
@@ -78,13 +80,13 @@ var shopping = function () {
                         shopping();
                     } else {
                         console.log("");
-                        console.log(res[0].products_name + "purchased");
+                        console.log(res[0].product_name + "purchased");
                         console.log(quantity + "qty @ $" + res[0].price);
 
-                        var newQuantity = res[0].stock_quantity - quantity;
+                        var newQuantity = res[0].stock_quantity - stock_quantity;
                         connection.query(
                             "UPDATE products SET stock_quantity =" +
-                            newQuantity + "WHERE id =" + res[0].id,
+                            newQuantity + "WHERE item_id =" + res[0].item_id,
                             function (err, resUpdate) {
                                 if (err) throw err;
                                 console.log("");
@@ -95,90 +97,10 @@ var shopping = function () {
                     };
                 }
                 )
-                );
             };
         });
     });
 }; 
 
             display();
-
-
-// //Show the table with products for consumer to view
-// function showProducts(answer) {
-//     var query = "SELECT product_name,price,stock_quantity FROM products";
-//     connection.query(query,  function(err, res) {
-//       var theDisplayTable = new Table({
-//         head: ['Product Name', 'Price', 'Quantity'],
-
-//           colWidths: [10, 30, 10, 14]
-//         });
-
-//         for (var i = 0; i < res.length; i++) {
-//            theDisplayTable.push(
-//             [res[i].product_name, res[i].price, res[i].stock_quantity]
-//             );
-//          }
-//             console.log(theDisplayTable.toString());
-
-
-//       pickProduct();
-//     });
-// }
-
-// //Pick a product and how many
-// function pickProduct(answer) {
-//     inquirer.prompt([
-//       {
-//         name: "item",
-//         type: "input",
-//         message: "Enter the ID of the item you would like to purchase"
-//       },
-//       {
-//         name: "count",
-//         type: "input",
-//         message: "How many would you like to buy?"
-//       }
-
-//       ]).then(function(answer) {
-//           connection.query("SELECT product_name,price,stock_quantity FROM products WHERE ?",
-//             {item_id: answer.item},  function(err, res) {
-
-//               //console.log("count " + answer.count);
-
-//               if (parseInt(answer.count) > res[0].stock_quantity) {
-
-//                 console.log("sorry, there are only " + res[0].stock_quantity + " left");
-//                 pickProduct();
-
-//               }
-
-//               else {
-//                 console.log("Your purchase of " + answer.count + ' ' + res[0].product_name +"/s total cost is: $ " + parseInt(res[0].price) * parseInt(answer.count));
-//                var quantityLeft = res[0].stock_quantity - answer.count;
-//                       console.log(quantityLeft);
-//                       connection.query(
-//                         "UPDATE products SET ? WHERE ?",
-//                         [
-//                           {
-//                             stock_quantity: quantityLeft
-//                           },
-//                           {
-//                             item_id: answer.item
-//                           }
-//                         ],
-//                         function(error) {
-//                           if (error) throw err;
-
-
-//                         }); 
-//                       console.log("Inventory updated. There are  " + quantityLeft + " left"); 
-//                       showProducts();
-//                }
-
-
-//             })
-//       });
-
-// };      
-
+            shopping();
