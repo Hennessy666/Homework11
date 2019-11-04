@@ -1,5 +1,7 @@
 # Homework11
 
+
+##What is Bamazon?
 Bamazon is a command line CLI that allows fake users to purchase fake items from a local database and manipulate the inventory and number of items via the command line. There are three levels to Bamazon, the Customer level, Manager level, and Supervisor level where you can use Mysql to store items. 
 
 How to Install and Create this App
