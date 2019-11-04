@@ -1,0 +1,49 @@
+CREATE DATABASE bstamazon_db;
+
+USE bstamazon_db;
+
+CREATE TABLE products (
+	item_id INTEGER(10) NOT NULL AUTO_INCREMENT,
+    product_name VARCHAR (100) NOT NULL,
+    department_name VARCHAR (100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INTEGER(11) NULL,
+    PRIMARY KEY (item_id)
+);
+
+CREATE TABLE departments (
+	department_id INTEGER(10) NOT NULL AUTO_INCREMENT,
+    department_name VARCHAR(100) NOT NULL,
+    over_head_costs DECIMAL NOT NULL,
+    PRIMARY KEY(department_id)
+);
+
+-- Insert mock items into the database--
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ('Ballpoint Pens', 'Office Supplies', 2.00, 200),
+		('Taco Shells', 'Grocery', 6.99, 100),
+        ('Game of Thrones by George RR Martin', 'books', 13.95, 32),
+        ('The Best of the Grateful Dead', 'CD/Music', 10.00, 19),
+        ('Java for Dummies', 'books', 9.00, 3),
+        ('Harry Potter and the sorcerers stone', 'books', 8.95, 25),
+        ('Whole Milk', 'Grocery', 4.90, 350),
+        ('Printer Paper', 'Office Supplies', 50.00, 500),
+        ('VR Occulus', 'Technology', 350.00, 3000),
+        ('Spanish for Intermediate Students', 'books', 4.45, 89),
+        ('Silver Alarm Clock', 'bedroom', 29.00, 23),
+        ('Star Wars Poster', 'teens/young adult', 3.00, 48),
+        ('Green Medium BeanBag', 'teens/young adult', 60.00, 10);
+        
+        select * FROM products
+        
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ('Office Supplies', 10000),
+	   ('Grocery', 2000),
+       ('books,', 5000),
+       ('CD/Music', 1200),
+       ('teens/young adult', 4000),
+       ('bedroom', 4000),
+       ('Technology', 1000);
+       
+SELECT * FROM departments;
