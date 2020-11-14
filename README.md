@@ -1,13 +1,10 @@
-# Homework11
-
-
 ## What is Bamazon?
 
-Bamazon is a command line CLI that allows fake users to purchase fake items from a local database and manipulate the inventory and number of items via the command line. There are three levels to Bamazon, the Customer level, Manager level, and Supervisor level where you can use Mysql to store items. 
+Bamazon is a command line CLI that allows fake users to purchase fake items from a local database and manipulate the inventory and number of items via the command line. There are three levels to Bamazon, the Customer level, Manager level, and Supervisor level where you can use Mysql to store items. It has an automated inventory audit and alert system that will not allow the customer to order more than quantity available in stock.
 
 ## How to Install and Create this App
 
-In order to create your own Bamazon you first need to create and clone a repository from github onto your local terminal. 
+In order to create your own Bamazon you first need to create and clone a repository from github onto your local terminal. Next run nmp install and build database from schema.sql. At command prompt run node bamazonCustomer.js.
 
 This is an image of bamazonCustomer.js with the table of the items.
 ![Image of bamazonCustomer.js](https://github.com/Hennessy666/Homework11/blob/master/bamazonCustomer.png)
