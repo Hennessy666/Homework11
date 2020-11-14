@@ -18,7 +18,7 @@ This is an image of bamazonManager.js where the manager is asked to select wheth
 Managers also have the option of choosing to add inventory to a product department or adding a new item all together.
 ![Image of addnewproduct.js](https://github.com/Hennessy666/Homework11/blob/master/addnewproduct.png)
 
-##Technologies Utilized
+## Technologies Utilized
 
 1. mySQL
 2. NodeJS
